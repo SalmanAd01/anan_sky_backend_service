@@ -14,6 +14,32 @@ Core responsibilities:
 
 The system is designed to be event-driven, asynchronous, and scalable, separating API responsibilities from background processing.
 
+```mermaid
+flowchart LR
+    %% API Layer
+    A[Devices / Clients] -->|HTTP Telemetry| B[FastAPI API Server]
+
+    %% Database
+    B -->|Store / Read| C[(MongoDB)]
+    C -->|Telemetry & Device & Alerts| C1[Collections]
+
+    %% Kafka
+    B -->|Publish Events| D[Kafka Topics]
+
+    %% Consumers
+    D --> E[External Source Fetch Consumer]
+    D --> F[Alert Evaluation Consumer]
+
+    %% External Sources
+    E -->|Call APIs| G[External Data Sources]
+    G -->|Enriched Data| E
+    E -->|Store Enriched Telemetry| C
+
+    %% Alerts
+    F -->|Evaluate Rules| H[Alerts Generated]
+    H -->|Persist Alerts| C
+```
+
 2. How to run it
 
 Prerequisites
