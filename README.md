@@ -77,6 +77,54 @@ MODE=consumer CONSUMER_TYPE=fetch_external_source python src/main.py
 MODE=consumer CONSUMER_TYPE=alert_evaluator python src/main.py
 ```
 
+
+## Run using Makefile
+
+A Makefile is provided to simplify local development and execution of the system.
+
+Available commands:
+
+```bash
+make help
+
+# Displays all available Makefile targets.
+
+# Install dependencies
+make install
+
+# Installs all Python dependencies from requirements.txt.
+
+# Start API server
+make server
+
+# Runs the FastAPI server using Uvicorn on port 8001.
+
+# Run Kafka consumers
+# Run alert evaluation consumer
+make consumer-alert
+
+# Run external source fetch consumer
+make consumer-fetch
+
+# Run consumer by type
+make consumer-run CONSUMER_TYPE=fetch_external_source
+
+# Run simulators
+# Simulate device telemetry
+make device-sim
+
+# Simulate external data source
+make external-sim
+
+# Start local dependencies (Docker)
+# Start Kafka
+make start-kafka
+
+# Start MongoDB
+make start-mongo
+
+```
+
 3. Key decisions made
 
 - Single MongoDB client per process
