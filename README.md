@@ -105,19 +105,3 @@ MODE=consumer CONSUMER_TYPE=alert_evaluator python src/main.py
 - Add automated tests for consumers and alert evaluation logic
 - Support schema versioning for telemetry payloads
 
----
-
-Implementation notes, quick developer guide and where to look
-
-This repository (`src/`) contains the FastAPI server, Kafka helpers, MongoDB access wrappers and per-consumer implementations. Below are the most relevant files and folders:
-
-- `src/main.py` — application entrypoint. Starts FastAPI when `MODE=server` or runs the consumer runner when `MODE=consumer`.
-- `src/config.py` — central configuration.
-- `src/db.py` and `src/db_models.py` — Motor client wrapper and simple collection helpers.
-- `src/models.py` — Pydantic models used by API endpoints.
-- `src/kafka_client.py`, `src/producer.py`, `src/topic.py` — helpers to publish and consume Kafka messages.
-- `src/consumers/runner.py` — consumer runner and lifecycle management (creates aiokafka consumer within an asyncio loop; restart/backoff logic).
-- `src/consumers/config.py` — topic names, compatibility helpers and mapping registry.
-- `src/consumers/external_source/` and `src/consumers/validate_alerts/` — per-consumer implementations and handlers.
-- `src/routes/` — FastAPI routes for telemetry, devices, alerts and external sources.
-- `src/scripts/` — small simulators (device telemetry, external source events) to exercise the system locally.
