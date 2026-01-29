@@ -48,6 +48,18 @@ Prerequisites
 - MongoDB
 - Kafka
 
+a. if you have docker then to run kafka and mongodb you can use bellow docker commands
+
+Start MongoDB
+```bash
+docker run --name localmongo --rm -d -p 27018:27017 mongo:latest
+```
+
+Start Kafka
+```bash
+docker run --name localkafka --rm -it -d -p 3181:3181 -p 3040:3040 -p 7081:7081 -p 7082:7082 -p 7083:7083 -p 7092:7092 --env ZK_PORT=3181 --env WEB_PORT=3040 --env REGISTRY_PORT=8081 --env REST_PORT=7082 --env CONNECT_PORT=7083 --env BROKER_PORT=7092 --env ADV_HOST=127.0.0.1 lensesio/fast-data-dev
+```
+
 Environment Variables
 
 ```bash
