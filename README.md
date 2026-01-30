@@ -89,6 +89,17 @@ MODE=consumer CONSUMER_TYPE=fetch_external_source python src/main.py
 MODE=consumer CONSUMER_TYPE=alert_evaluator python src/main.py
 ```
 
+Run External Source Simulator
+
+```bash
+PYTHONPATH=src python src/scripts/external_source.py
+```
+
+Run Device Telemetry Simulator
+
+```bash
+ PYTHONPATH=src python src/scripts/device_simulator.py
+```
 
 ## Run using Makefile
 
