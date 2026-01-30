@@ -33,6 +33,18 @@ async def create_external_source_type(payload: ExternalSourceTypeCreate):
     except Exception:
         raise HTTPException(status_code=500, detail="internal server error")
 
+@router.get("/external-source-types")
+async def get_external_source_types():
+    try:
+        cursor = ExternalSourceTypeModel.connect().find()
+        results = []
+        async for document in cursor:
+            document["_id"] = str(document["_id"])
+            results.append(document)
+        return results
+    except Exception:
+        raise HTTPException(status_code=500, detail="internal server error")
+
 
 @router.post("/external-sources")
 async def create_external_source(payload: ExternalSourceCreate):
@@ -59,6 +71,20 @@ async def create_external_source(payload: ExternalSourceCreate):
         raise
     except Exception:
         raise HTTPException(status_code=500, detail="internal server error")
+
+@router.get("/external-sources")
+async def get_external_sources():
+    try:
+        cursor = ExternalSourceModel.connect().find()
+        results = []
+        async for document in cursor:
+            document["_id"] = str(document["_id"])
+            document["source_type_id"] = str(document["source_type_id"]) if document.get("source_type_id") else None
+            results.append(document)
+        return results
+    except Exception:
+        raise HTTPException(status_code=500, detail="internal server error")
+
 
 @router.post("/device-external-sources")
 async def link_device_to_external_source(payload: DeviceExternalSourceCreate):
@@ -89,5 +115,19 @@ async def link_device_to_external_source(payload: DeviceExternalSourceCreate):
         return created
     except HTTPException:
         raise
+    except Exception:
+        raise HTTPException(status_code=500, detail="internal server error")
+
+@router.get("/device-external-sources")
+async def get_device_external_sources():
+    try:
+        cursor = DeviceExternalSourceModel.connect().find()
+        results = []
+        async for document in cursor:
+            document["_id"] = str(document["_id"])
+            document["device_id"] = str(document["device_id"]) if document.get("device_id") else None
+            document["source_id"] = str(document["source_id"]) if document.get("source_id") else None
+            results.append(document)
+        return results
     except Exception:
         raise HTTPException(status_code=500, detail="internal server error")
