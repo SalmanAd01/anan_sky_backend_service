@@ -52,7 +52,7 @@ a. if you have docker then to run kafka and mongodb you can use bellow docker co
 
 Start MongoDB
 ```bash
-docker run --name localmongo --rm -d -p 27018:27017 mongo:latest
+docker run --name localmongo --rm -d -p 27017:27017 mongo:latest
 ```
 
 Start Kafka
