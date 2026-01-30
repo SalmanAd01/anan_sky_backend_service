@@ -101,6 +101,8 @@ Run Device Telemetry Simulator
  PYTHONPATH=src python src/scripts/device_simulator.py
 ```
 
+for api endpoints check here [curls](./https.md)
+
 ## Run using Makefile
 
 A Makefile is provided to simplify local development and execution of the system.
