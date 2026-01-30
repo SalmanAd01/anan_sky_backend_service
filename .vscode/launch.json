@@ -1,0 +1,72 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+        "name": "Python: Uvicorn (reload)",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+            "src.main:app",
+            "--reload",
+            "--port",
+            "8001"
+        ],
+        "env": {
+            "PYTHONPATH": "src",
+            "MODE": "server"
+        },
+        "justMyCode": true,
+        "console": "integratedTerminal"
+        },
+        {
+            "name": "Alert Consumer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main.py",
+            "env": {
+                "MODE": "consumer",
+                "CONSUMER_TYPE": "alert_evaluator",
+                "KAFKA_GROUP_ID": "alert_evaluator"
+            },
+            "jinja": true
+        },
+        {
+            "name": "Fetch External Source Data Consumer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main.py",
+            "env": {
+                "MODE": "consumer",
+                "CONSUMER_TYPE": "fetch_external_source",
+                "KAFKA_GROUP_ID": "fetch_external_source"
+            },
+            "jinja": true
+        },
+        {
+            "name": "Run External Source Script",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/scripts/external_source.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "src"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Run Device Simulator Script",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/scripts/device_simulator.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "src"
+            },
+            "justMyCode": true
+        }
+    ]
+}
