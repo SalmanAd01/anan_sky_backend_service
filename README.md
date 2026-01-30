@@ -76,7 +76,7 @@ CONSUMER_TYPE=fetch_external_source  # or alert_evaluator
 Run API Server
 
 ```bash
-MODE=server uvicorn src.main:app --reload
+MODE=server PYTHONPATH=src uvicorn src.main:app --reload --port 8001
 ```
 
 Run Kafka Consumer
